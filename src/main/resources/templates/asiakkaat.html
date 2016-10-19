@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="fi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Myyntitykki</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="container">
+        <h3>Lisää uusi asiakas</h3>
+
+        <form method="POST" th:action="@{/asiakkaat}">
+            <table>
+                <tr>
+                    <td><label>Nimi</label></td>
+                    <td><input type="text" name="nimi" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Katuosoite</label></td>
+                    <td><input type="text" name="katuosoite" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Huoneisto</label></td>
+                    <td><input type="text" name="huoneisto" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Kaupunki</label></td>
+                    <td><input type="text" name="kaupunki" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Myyntiarvio</label></td>
+                    <td><input type="text" name="myyntiarvio" /></td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Lisää" />
+        </form>
+        
+        <h3>Asiakkaat</h3>
+        
+        <table th:each="asiakas: ${asiakkaat}">
+            <tr>
+                <td th:text="${asiakas.nimi}"></td>
+                <td>&nbsp;</td>
+                <td th:text="${#numbers.formatDecimal(asiakas.longitudi, 1, 6, 'COMMA')}"></td>
+                <td>&nbsp;</td>
+                <td th:text="${#numbers.formatDecimal(asiakas.latitudi, 1, 6, 'COMMA')}"></td>
+             </tr>
+        </table>
+        
+        <p><a th:href="@{/}">Takaisin</a></p>
+        <p><a th:href="@{/signup}">Myyjät</a></p>
+        <p><a th:href="@{/tehtavat}">Jaa tehtäviä</a></p>
+    </body>
+</html>
