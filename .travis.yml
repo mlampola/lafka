@@ -1,0 +1,10 @@
+language: java
+jdk:
+- oraclejdk8
+deploy:
+  provider: heroku
+  api_key:
+    secure: RjTMcN0Jw0+8o/2WUDY9XgCpwbDb0SQFycveFOm4RgJuXejYk7SDxarBLrG5wXh8J9JAdA8ebYiOeawRNWtluogwSX4svrBRBlK20znSq5EsNq2HGjVuJRx7qXTLc0S5rywaKPj4reIavz0+utHOBOmwVPn6MHxTF1nDBMK9A4rspPpd0m2KHMuXxAZOWTmdHc1FKOx1HEZXZvVR9nNnMTIh2sKEw4aZ5L/+JdWYKOxzX64bRZDAiBd4UYG0oWOMlDVlTlcYpDkNGA7CR3g+6FjoOSoojfM2/ydE1D+iXeM27gyiW2AHRi5A4RJFSH76NMd67WAeSmwy565qPv3QPSDZg7p3EKEwbme2YrCKh2cUwFtNACIoqxTEe+OgDSsTI8YiisPYmjuBUnPz3NKAN8fvvMbR0JMeL2hYyALMZsI0fG9Rs57fnGqKutONIjFFBLFsT+UFLwmGpTrmZfOuq2/vd0xNmC7rWs8Z+FMsMwF93YesICOU0G3hCGLp0dODHmXys4ShNh9JbMNaWXC/P4inGkr8Dp2qeXbNUHuU1Hnupw1p+rZDW7xl0t9c0Fyyfe16PkPfpYh3O5SDR3CU1vPYvLwvtI4FZYiHv0Foz/yVo+/rAr/hzEa25Cn/XpQbUVDXe3HUyvn8I7q9V+mGXk31szLaAXfMuGNjRJMonqY=
+  app: lafka-2016
+  on:
+    repo: mlampola/lafka
