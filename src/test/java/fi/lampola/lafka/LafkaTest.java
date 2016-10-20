@@ -24,12 +24,12 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MyyntitykkiTest {
+public class LafkaTest {
 
     @Autowired
     HenkiloRepository henkiloRepository;
             
-    public MyyntitykkiTest() {
+    public LafkaTest() {
     }
 
     @BeforeClass
@@ -50,21 +50,24 @@ public class MyyntitykkiTest {
 
     @Test
     public void testHenkilo() {
-        String nimi = "Albert Edelfeldt";
-        String username = "aedelfeldt";
+        String etunimi = "Albert";
+        String sukunimi = "Edelfeldt";
+        String email = "null@dev.null";
         
         Henkilo henkilo = new Henkilo();
-        henkilo.setUsername(username);
+        henkilo.setEmail(email);
         henkilo.setPassword("ae");
-        henkilo.setNimi(nimi);
+        henkilo.setEtunimi(etunimi);
+        henkilo.setSukunimi(sukunimi);
         henkilo.setKatuosoite("Aleksanterinkatu 13");
         henkilo.setKaupunki("Helsinki");
 
         henkiloRepository.save(henkilo);
         
-        Henkilo dbHenkilo = henkiloRepository.findByUsername(username);
+        Henkilo dbHenkilo = henkiloRepository.findByEmail(email);
         assertNotNull(dbHenkilo);
-        assertEquals(nimi, dbHenkilo.getNimi());
-        assertEquals(username, dbHenkilo.getUsername());
+        assertEquals(etunimi, dbHenkilo.getEtunimi());
+        assertEquals(sukunimi, dbHenkilo.getSukunimi());
+        assertEquals(email, dbHenkilo.getEmail());
     }
 }

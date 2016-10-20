@@ -18,20 +18,19 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Henkilo extends AbstractPersistable<Long>{
 
-    private String nimi;
+    private String etunimi;
+    private String sukunimi;
     
     @Column(unique = true)
-    private String username;
+    private String email;
     
     private String password;
+    private String salt;
 
     private String katuosoite; // Esim. Helsinginkatu 20 (ilman rappua/huoneistoa)
     private String huoneisto; // Esim. A 1
     private String kaupunki;
     private String maa;
-    
-    @Column(unique = true)
-    private String email;
     
     @OneToMany(mappedBy="myyja")
     private List<Tehtava> tehtavat;
@@ -43,23 +42,31 @@ public class Henkilo extends AbstractPersistable<Long>{
     public Henkilo() {
         this.setMaa("Finland");
     }
+
+    public String getEtunimi() {
+        return etunimi;
+    }
+
+    public void setEtunimi(String etunimi) {
+        this.etunimi = etunimi;
+    }
+
+    public String getSukunimi() {
+        return sukunimi;
+    }
+
+    public void setSukunimi(String sukunimi) {
+        this.sukunimi = sukunimi;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
-    public String getNimi() {
-        return nimi;
-    }
-
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
