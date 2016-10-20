@@ -24,7 +24,7 @@
                     <td><label>Myyjä:</label></td>
 
                     <td><select name="myyjaId">
-                            <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.nimi}">myyjä</option>
+                            <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä</option>
                         </select>
                     </td>
 
@@ -37,7 +37,7 @@
             <tr th:each="tehtava: ${tehtavat}">
                 <td><b><span th:text="${tehtava.asiakas.nimi}"></span></b></td>
                 <td>&nbsp;</td>
-                <td><i><span th:text="${tehtava.myyja.nimi}"></span></i></td>
+                <td><i><span th:text="${tehtava.myyja.sukunimi + ', ' + tehtava.myyja.etunimi}"></span></i></td>
                 <td>&nbsp;</td>
                 <td><span th:text="${tehtava.arvioituMyynti}"></span></td>
                 <td>&nbsp;</td>
@@ -45,7 +45,7 @@
                 <td>
                     <form method="POST" th:action="@{/tehtavat/{tehtavaId}/myyja(tehtavaId=${tehtava.id})}">
                         <select name="myyjaId">
-                            <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.nimi}">myyjä</option>
+                            <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä</option>
                         </select>
                         <input type="submit" value="Muuta myyjä" id="lisaa_myyjalle"/>
                     </form>

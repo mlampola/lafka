@@ -14,12 +14,12 @@
         <form method="POST" th:action="@{/henkilot}">
             <table>
                 <tr>
-                    <td><label>Etuimi</label></td>
+                    <td><label>Etunimi</label></td>
                     <td><input type="text" name="etunimi" /></td>
                 </tr>
 
                 <tr>
-                    <td><label>Sukuimi</label></td>
+                    <td><label>Sukunimi</label></td>
                     <td><input type="text" name="sukunimi" /></td>
                 </tr>
 
@@ -56,7 +56,7 @@
 
         <table th:each="henkilo: ${henkilot}">
             <tr>
-                <td th:text="${henkilo.nimi}"></td>
+                <td th:text="${henkilo.sukunimi + ', ' + henkilo.etunimi}"></td>
                 <td>&nbsp;</td>
                 <td th:text="${#numbers.formatDecimal(henkilo.longitudi, 1, 6, 'COMMA')}"></td>
                 <td>&nbsp;</td>
