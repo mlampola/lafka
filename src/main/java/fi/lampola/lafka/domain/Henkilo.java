@@ -75,6 +75,14 @@ public class Henkilo extends AbstractPersistable<Long>{
         this.password = password;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public String getKatuosoite() {
         return katuosoite;
     }
