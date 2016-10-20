@@ -30,6 +30,9 @@ public class Henkilo extends AbstractPersistable<Long>{
     private String kaupunki;
     private String maa;
     
+    @Column(unique = true)
+    private String email;
+    
     @OneToMany(mappedBy="myyja")
     private List<Tehtava> tehtavat;
     
