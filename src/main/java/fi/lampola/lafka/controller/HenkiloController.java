@@ -6,9 +6,9 @@
 package fi.lampola.lafka.controller;
 
 import fi.lampola.lafka.domain.Henkilo;
-import fi.lampola.lafka.googleplaces.GeocodingResponse;
 import fi.lampola.lafka.repository.HenkiloRepository;
 import fi.lampola.lafka.service.GeoRestClient;
+import fi.lampola.lafka.service.HenkiloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +25,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HenkiloController {
 
     @Autowired
-    private HenkiloRepository henkiloRepository;
+    private HenkiloService henkiloService;
 
+    @Autowired
+    HenkiloRepository henkiloRepository;
+    
     @Autowired
     private GeoRestClient geoRepository;
 
@@ -38,13 +41,7 @@ public class HenkiloController {
     
     @RequestMapping(method = RequestMethod.POST)
     public String create(@ModelAttribute Henkilo henkilo) {
-        String address = henkilo.getKatuosoite() + "," + henkilo.getKaupunki() + "," + henkilo.getMaa();
-        address.replace(' ', '+');
-        GeocodingResponse resp = geoRepository.findByAddress(address);
-        henkilo.setLongitudi(resp.getResults().get(0).getGeometry().getLocation().getLng());
-        henkilo.setLatitudi(resp.getResults().get(0).getGeometry().getLocation().getLat());
-        
-        henkiloRepository.save(henkilo);
+        henkiloService.add(henkilo, true);
         return "redirect:/henkilot";
     }
 }

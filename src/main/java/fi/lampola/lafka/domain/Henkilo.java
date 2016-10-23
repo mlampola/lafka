@@ -9,7 +9,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Henkilo extends AbstractPersistable<Long>{
     private String etunimi;
     private String sukunimi;
     
+    @Email
     @Column(unique = true)
     private String email;
     
@@ -72,7 +75,13 @@ public class Henkilo extends AbstractPersistable<Long>{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.salt = BCrypt.gensalt();
+        
+        while (this.salt.contains("/") || this.salt.contains(".")) {
+            this.salt = BCrypt.gensalt();
+        }
+        
+        this.password = BCrypt.hashpw(password, this.salt);
     }
 
     public String getSalt() {
