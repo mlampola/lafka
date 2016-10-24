@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface HenkiloRepository extends JpaRepository<Henkilo, Long> {
     
     Henkilo findByEmail(String email);
+    Henkilo findBySalt(String salt);
 }

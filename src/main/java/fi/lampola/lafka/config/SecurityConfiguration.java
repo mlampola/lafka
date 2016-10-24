@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSettings(http);
 
         http.authorizeRequests()
-                .antMatchers("/h2-console/*", "/login", "/signup").permitAll()
+                .antMatchers("/h2-console/*", "/login", "/signup", "/reset/*").permitAll()
                 .antMatchers("/henkilot").permitAll()
                 .anyRequest().authenticated();
 

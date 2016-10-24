@@ -9,19 +9,20 @@
     </head>
 
     <body class="container">
-        <h3>Myyjät</h3>
+        <h1>Aseta uusi salasana</h1>
         
-        <table th:each="henkilo: ${henkilot}">
-            <tr>
-                <td th:text="${henkilo.nimi}"></td>
-                <td>&nbsp;</td>
-                <td th:text="${#numbers.formatDecimal(henkilo.longitudi, 1, 6, 'COMMA')}"></td>
-                <td>&nbsp;</td>
-                <td th:text="${#numbers.formatDecimal(henkilo.latitudi, 1, 6, 'COMMA')}"></td>
-             </tr>
-        </table>
+        <form method="POST" th:action="@{/reset/{salt}(salt=${henkilo.salt})}">
+            <table>
+                <tr>
+                    <td><label>Salasana</label></td>
+                    <td><input type="text" name="password" /></td>
+                </tr>
+            </table>
 
-        <p><a th:href="@{/}">Takaisin</a></p>
+            <input type="submit" value="Aseta" />
+        </form>
+
+        <p><a th:href="@{/signup}">Myyjät</a></p>
         <p><a th:href="@{/asiakkaat}">Asiakkaat</a></p>
         <p><a th:href="@{/tehtavat}">Jaa tehtäviä</a></p>
     </body>

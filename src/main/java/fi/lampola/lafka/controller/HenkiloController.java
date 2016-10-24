@@ -9,6 +9,7 @@ import fi.lampola.lafka.domain.Henkilo;
 import fi.lampola.lafka.repository.HenkiloRepository;
 import fi.lampola.lafka.service.GeoRestClient;
 import fi.lampola.lafka.service.HenkiloService;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,21 @@ public class HenkiloController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String create(@ModelAttribute Henkilo henkilo) {
-        henkiloService.add(henkilo, true);
+    public String create(HttpServletRequest request, @ModelAttribute Henkilo henkilo) {
+        henkiloService.add(henkilo, true, getApplicationBaseUrl(request));
         return "redirect:/henkilot";
+    }
+
+    public static String getApplicationBaseUrl(HttpServletRequest request) {
+        String url;
+
+        String scheme = request.getScheme() + "://";
+        String serverName = request.getServerName();
+        String serverPort = (request.getServerPort() == 80) ? "" : ":" + request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        url = scheme + serverName + serverPort + contextPath;
+
+        return url;
     }
 }

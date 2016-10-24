@@ -48,7 +48,7 @@ public class DefaultController {
             admin.setHuoneisto("A 1");
             admin.setKaupunki("Helsinki");
 
-            henkiloService.add(admin, false);
+            henkiloService.add(admin, false, "");
         }
     }
     
