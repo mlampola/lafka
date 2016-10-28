@@ -42,6 +42,13 @@
                     <td><label>Kaupunki</label></td>
                     <td><input type="text" name="kaupunki" /></td>
                 </tr>
+                
+                <tr>
+                    <td><label>Rooli</label></td>
+                    <td><select name="rooliId">
+                        <option th:each="rooli : ${roolit}" th:value="${rooli.id}" th:text="${rooli.nimi}">rooli</option>
+                    </select></td>
+                </tr>
             </table>
 
             <input type="submit" value="Lisää" />

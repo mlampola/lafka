@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Markus
  */
 public interface RooliRepository extends JpaRepository<Rooli, Long> {
+    
+    Rooli findByNimi(String nimi);
 }

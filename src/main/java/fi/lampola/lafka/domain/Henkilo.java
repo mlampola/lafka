@@ -8,6 +8,7 @@ package fi.lampola.lafka.domain;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -34,6 +35,9 @@ public class Henkilo extends AbstractPersistable<Long>{
     private String huoneisto; // Esim. A 1
     private String kaupunki;
     private String maa;
+    
+    @ManyToOne
+    private Rooli rooli;
     
     @OneToMany(mappedBy="myyja")
     private List<Tehtava> tehtavat;
@@ -146,5 +150,13 @@ public class Henkilo extends AbstractPersistable<Long>{
 
     public void setMaa(String maa) {
         this.maa = maa;
+    }
+
+    public Rooli getRooli() {
+        return rooli;
+    }
+
+    public void setRooli(Rooli rooli) {
+        this.rooli = rooli;
     }
 }

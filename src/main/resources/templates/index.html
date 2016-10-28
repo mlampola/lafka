@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="fi">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.springframework.org/security/tags" lang="fi">
     <head>
         <meta charset="UTF-8" />
         <title>Lafka</title>
@@ -30,5 +30,13 @@
         <p><a th:href="@{/signup}">Myyjät</a></p>
         <p><a th:href="@{/asiakkaat}">Asiakkaat</a></p>
         <p><a th:href="@{/tehtavat}">Jaa tehtäviä</a></p>
+        
+        <p/>
+        <div sec:authorize="hasAuthority('USER')">USER</div>
+        <div sec:authorize="hasAuthority('ADMIN')">ADMIN</div>
+        <div sec:authorize="isAnonymous()">Anonymous </div>
+        <div sec:authorize="isAuthenticated()">Authenticated</div>
+        <div sec:authentication="name">Name</div> 
+
     </body>
 </html>

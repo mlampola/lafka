@@ -6,7 +6,9 @@
 package fi.lampola.lafka.controller;
 
 import fi.lampola.lafka.domain.Henkilo;
+import fi.lampola.lafka.domain.Rooli;
 import fi.lampola.lafka.repository.HenkiloRepository;
+import fi.lampola.lafka.repository.RooliRepository;
 import fi.lampola.lafka.service.GeoRestClient;
 import fi.lampola.lafka.service.HenkiloService;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -34,14 +37,20 @@ public class HenkiloController {
     @Autowired
     private GeoRestClient geoRepository;
 
+    @Autowired
+    private RooliRepository rooliRepository;
+
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("henkilot", henkiloRepository.findAll());
+        model.addAttribute("roolit", rooliRepository.findAll());
         return "signup";
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String create(HttpServletRequest request, @ModelAttribute Henkilo henkilo) {
+    public String create(HttpServletRequest request, @ModelAttribute Henkilo henkilo, @RequestParam Long rooliId) {
+        Rooli rooli = rooliRepository.findOne(rooliId);
+        henkilo.setRooli(rooli);
         henkiloService.add(henkilo, true, getApplicationBaseUrl(request));
         return "redirect:/henkilot";
     }

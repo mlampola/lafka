@@ -6,7 +6,9 @@ package fi.lampola.lafka;
  * and open the template in the editor.
  */
 import fi.lampola.lafka.domain.Henkilo;
+import fi.lampola.lafka.domain.Rooli;
 import fi.lampola.lafka.repository.HenkiloRepository;
+import fi.lampola.lafka.repository.RooliRepository;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +31,9 @@ public class LafkaTest {
     @Autowired
     HenkiloRepository henkiloRepository;
             
+    @Autowired
+    private RooliRepository rooliRepository;
+
     public LafkaTest() {
     }
 
@@ -50,6 +55,12 @@ public class LafkaTest {
 
     @Test
     public void testHenkilo() {
+        Rooli rooli = new Rooli();
+        rooli.setNimi("TEST");
+        rooli.setKuvaus("Testaaja");
+
+        rooliRepository.save(rooli);
+
         String etunimi = "Albert";
         String sukunimi = "Edelfeldt";
         String email = "null@dev.null";
@@ -61,6 +72,7 @@ public class LafkaTest {
         henkilo.setSukunimi(sukunimi);
         henkilo.setKatuosoite("Aleksanterinkatu 13");
         henkilo.setKaupunki("Helsinki");
+        henkilo.setRooli(rooli);
 
         henkiloRepository.save(henkilo);
         
@@ -69,5 +81,6 @@ public class LafkaTest {
         assertEquals(etunimi, dbHenkilo.getEtunimi());
         assertEquals(sukunimi, dbHenkilo.getSukunimi());
         assertEquals(email, dbHenkilo.getEmail());
+        assertEquals(henkilo.getRooli().getNimi(), dbHenkilo.getRooli().getNimi());
     }
 }

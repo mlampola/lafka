@@ -47,7 +47,7 @@ public class JpaAuthenticationProvider implements AuthenticationProvider {
         }
 
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority("USER"));
+        grantedAuths.add(new SimpleGrantedAuthority(henkilo.getRooli().getNimi()));
 
         return new UsernamePasswordAuthenticationToken(henkilo.getEmail(), password, grantedAuths);
     }
