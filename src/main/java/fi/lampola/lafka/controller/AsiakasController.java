@@ -45,6 +45,6 @@ public class AsiakasController {
         asiakas.setLatitudi(resp.getResults().get(0).getGeometry().getLocation().getLat());
         
         asiakasRepository.save(asiakas);
-        return "redirect:/asiakkaat";
+        return "redirect:/";
     }
 }

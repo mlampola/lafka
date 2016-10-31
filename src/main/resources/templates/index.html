@@ -9,34 +9,178 @@
     </head>
 
     <body class="container">
-        <h1>Lafka</h1>
+        <div sec:authorize="isAnonymous()">
+        <h1>Tervetuloa Lafkaan!</h1>
         
-        <form method="POST" th:action="@{/login}">
-            <table>
-                <tr>
-                    <td><label>Email</label></td>
-                    <td><input type="text" name="email" /></td>
-                </tr>
+            <form method="POST" th:action="@{/login}">
+                <table>
+                    <tr>
+                        <td><label>Sähköposti</label></td>
+                        <td><input type="text" name="email" /></td>
+                    </tr>
 
-                <tr>
-                    <td><label>Salasana</label></td>
-                    <td><input type="text" name="password" /></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td><label>Salasana</label></td>
+                        <td><input type="text" name="password" /></td>
+                    </tr>
+                </table>
 
-            <input type="submit" value="Kirjaudu" />
-        </form>
-
-        <p><a th:href="@{/signup}">Myyjät</a></p>
-        <p><a th:href="@{/asiakkaat}">Asiakkaat</a></p>
-        <p><a th:href="@{/tehtavat}">Jaa tehtäviä</a></p>
+                <input type="submit" value="Kirjaudu" />
+            </form>
+        </div>
         
-        <p/>
-        <div sec:authorize="hasAuthority('USER')">USER</div>
-        <div sec:authorize="hasAuthority('ADMIN')">ADMIN</div>
-        <div sec:authorize="isAnonymous()">Anonymous </div>
-        <div sec:authorize="isAuthenticated()">Authenticated</div>
-        <div sec:authentication="name">Name</div> 
+        <div sec:authorize="isAuthenticated()">
+            <span sec:authorize="hasAuthority('ADMIN')">ADMIN - </span>
+            <span sec:authentication="name">Name</span>
+            <span>&nbsp;-&nbsp;<a th:href="@{/logout}">Kirjaudu ulos</a></span> 
+            
+            <h1>Lafka</h1>
 
+            <div sec:authorize="hasAuthority('ADMIN')">
+                
+                <table>
+                    <tr>
+                        <td>
+                            <h3>
+                                Lisää uusi myyjä
+                            </h3>
+                            <form method="POST" th:action="@{/henkilot}">
+                                <table>
+                                    <tr>
+                                        <td><label>Etunimi</label></td>
+                                        <td><input type="text" name="etunimi" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Sukunimi</label></td>
+                                        <td><input type="text" name="sukunimi" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Email</label></td>
+                                        <td><input type="text" name="email" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Katuosoite</label></td>
+                                        <td><input type="text" name="katuosoite" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Huoneisto</label></td>
+                                        <td><input type="text" name="huoneisto" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Kaupunki</label></td>
+                                        <td><input type="text" name="kaupunki" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Rooli</label></td>
+                                        <td><select name="rooliId">
+                                                <option th:each="rooli : ${roolit}" th:value="${rooli.id}" th:text="${rooli.nimi}">rooli</option>
+                                            </select></td>
+                                    </tr>
+                                </table>
+
+                                <input type="submit" value="Lisää" />
+                            </form>                            
+                        </td>
+                        <td>&nbsp;
+                        </td>
+                        
+                        <td valign="top">
+                            <h3>Lisää uusi asiakas</h3>
+
+                            <form method="POST" th:action="@{/asiakkaat}">
+                                <table>
+                                    <tr>
+                                        <td><label>Nimi</label></td>
+                                        <td><input type="text" name="nimi" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Katuosoite</label></td>
+                                        <td><input type="text" name="katuosoite" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Huoneisto</label></td>
+                                        <td><input type="text" name="huoneisto" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Kaupunki</label></td>
+                                        <td><input type="text" name="kaupunki" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label>Myyntiarvio</label></td>
+                                        <td><input type="text" name="myyntiarvio" /></td>
+                                    </tr>
+                                </table>
+
+                                <input type="submit" value="Lisää" />
+                            </form>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <h3>Tehtävät</h3>
+
+                            <form method="POST" th:action="@{/tehtavat}">
+                                <table>
+                                    <tr>
+                                        <td><label>Asiakas:</label></td>
+
+                                        <td><select name="asiakasId">
+                                                <option th:each="asiakas : ${asiakkaat}" th:value="${asiakas.id}" th:text="${asiakas.nimi}">asiakas</option>
+                                            </select>
+                                        </td>
+
+                                        <td><label>Myyjä:</label></td>
+
+                                        <td><select name="myyjaId">
+                                                <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä</option>
+                                            </select>
+                                        </td>
+
+                                        <td><input type="submit" value="Lisää" /></td>
+                                    </tr>
+                                </table>
+                            </form>                            
+                        </td>
+                    </tr>
+                </table>
+                
+                <p/>
+                <table>
+                    <tr th:each="tehtava: ${tehtavat}">
+                        <td><b><span th:text="${tehtava.asiakas.nimi}"></span></b></td>
+                        <td>&nbsp;</td>
+                        <td><i><span th:text="${tehtava.myyja.sukunimi + ', ' + tehtava.myyja.etunimi}"></span></i></td>
+                        <td>&nbsp;</td>
+                        <td><span th:text="${tehtava.arvioituMyynti}"></span></td>
+                        <td>&nbsp;</td>
+
+                        <td>
+                            <form method="POST" th:action="@{/tehtavat/{tehtavaId}/myyja(tehtavaId=${tehtava.id})}">
+                                <select name="myyjaId">
+                                    <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä</option>
+                                </select>
+                                <input type="submit" value="Muuta myyjä" id="lisaa_myyjalle"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+                <p><a th:href="@{/signup}">Myyjät</a></p>
+                <p><a th:href="@{/asiakkaat}">Asiakkaat</a></p>
+                <p><a th:href="@{/tehtavat}">Jaa tehtäviä</a></p>
+                
+            </div>
+        </div>
     </body>
 </html>

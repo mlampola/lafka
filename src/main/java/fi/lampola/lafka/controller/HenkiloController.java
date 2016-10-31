@@ -52,7 +52,7 @@ public class HenkiloController {
         Rooli rooli = rooliRepository.findOne(rooliId);
         henkilo.setRooli(rooli);
         henkiloService.add(henkilo, true, getApplicationBaseUrl(request));
-        return "redirect:/henkilot";
+        return "redirect:/";
     }
 
     public static String getApplicationBaseUrl(HttpServletRequest request) {

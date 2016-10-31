@@ -7,8 +7,10 @@ package fi.lampola.lafka.controller;
 
 import fi.lampola.lafka.domain.Henkilo;
 import fi.lampola.lafka.domain.Rooli;
+import fi.lampola.lafka.repository.AsiakasRepository;
 import fi.lampola.lafka.repository.HenkiloRepository;
 import fi.lampola.lafka.repository.RooliRepository;
+import fi.lampola.lafka.repository.TehtavaRepository;
 import fi.lampola.lafka.service.GeoRestClient;
 import fi.lampola.lafka.service.HenkiloService;
 import javax.annotation.PostConstruct;
@@ -36,6 +38,12 @@ public class DefaultController {
 
     @Autowired
     private GeoRestClient geoRepository;
+
+    @Autowired
+    private AsiakasRepository asiakasRepository;
+
+    @Autowired
+    private TehtavaRepository tehtavaRepository;
 
     @PostConstruct
     private void init() {
@@ -81,13 +89,15 @@ public class DefaultController {
     
     @RequestMapping(value="*", method = RequestMethod.GET)
     public String home(Model model) {
+        model.addAttribute("henkilot", henkiloRepository.findAll());
+        model.addAttribute("roolit", rooliRepository.findAll());
+        model.addAttribute("asiakkaat", asiakasRepository.findAll());
+        model.addAttribute("tehtavat", tehtavaRepository.findAll());
         return "index";
     }
 
     @RequestMapping(value="/signup", method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("henkilot", henkiloRepository.findAll());
-        model.addAttribute("roolit", rooliRepository.findAll());
         return "signup";
     }
 }

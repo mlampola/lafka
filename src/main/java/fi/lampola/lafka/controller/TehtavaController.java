@@ -53,7 +53,7 @@ public class TehtavaController {
         Asiakas asiakas = asiakasRepository.findOne(Long.parseLong(asiakasId));
         tehtava.setAsiakas(asiakas);
         tehtavaRepository.save(tehtava);
-        return "redirect:/tehtavat";
+        return "redirect:/";
     }
     @RequestMapping(value="{tehtavaId}/myyja", method = RequestMethod.POST)
     public String assign(@PathVariable String tehtavaId , @RequestParam String myyjaId) {
@@ -61,6 +61,6 @@ public class TehtavaController {
         Henkilo myyja = henkiloRepository.findOne(Long.parseLong(myyjaId));
         tehtava.setMyyja(myyja);
         tehtavaRepository.save(tehtava);
-        return "redirect:/tehtavat";
+        return "redirect:/";
     }
 }
