@@ -168,9 +168,13 @@
                         <td>
                             <form method="POST" th:action="@{/tehtavat/{tehtavaId}/myyja(tehtavaId=${tehtava.id})}">
                                 <select name="myyjaId">
-                                    <option th:each="myyja : ${henkilot}" th:value="${myyja.id}" th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä</option>
+                                    <option th:each="myyja : ${henkilot}" 
+                                            th:if="${myyja.id} != ${tehtava.myyja.id}"
+                                            th:value="${myyja.id}" 
+                                            th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä
+                                    </option>
                                 </select>
-                                <input type="submit" value="Muuta myyjä" id="lisaa_myyjalle"/>
+                                <input type="submit" value="Vaihda myyjä" id="lisaa_myyjalle"/>
                             </form>
                         </td>
                     </tr>
