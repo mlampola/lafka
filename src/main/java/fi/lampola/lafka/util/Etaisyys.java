@@ -18,15 +18,15 @@ public class Etaisyys {
     private final static List<Ilmansuunta> ILMANSUUNNAT = new ArrayList();
 
     static {
-        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI, -Math.PI * 7 / 8, "Länsi"));
-        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 7 / 8, -Math.PI * 5 / 8, "Lounas"));
-        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 5 / 8, -Math.PI * 3 / 8, "Etelä"));
-        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 3 / 8, -Math.PI * 1 / 8, "Kaakko"));
-        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 1 / 8, Math.PI * 1 / 8, "Itä"));
-        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 1 / 8, Math.PI * 3 / 8, "Koillinen"));
-        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 3 / 8, Math.PI * 5 / 8, "Pohjoinen"));
-        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 5 / 8, Math.PI * 7 / 8, "Luode"));
-        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 7 / 8, Math.PI, "Länsi"));
+        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI, -Math.PI * 7 / 8, "länsi"));
+        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 7 / 8, -Math.PI * 5 / 8, "lounas"));
+        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 5 / 8, -Math.PI * 3 / 8, "etelä"));
+        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 3 / 8, -Math.PI * 1 / 8, "kaakko"));
+        ILMANSUUNNAT.add(new Ilmansuunta(-Math.PI * 1 / 8, Math.PI * 1 / 8, "itä"));
+        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 1 / 8, Math.PI * 3 / 8, "koillinen"));
+        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 3 / 8, Math.PI * 5 / 8, "pohjoinen"));
+        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 5 / 8, Math.PI * 7 / 8, "luode"));
+        ILMANSUUNNAT.add(new Ilmansuunta(Math.PI * 7 / 8, Math.PI, "länsi"));
     }
 
     private static class Ilmansuunta {

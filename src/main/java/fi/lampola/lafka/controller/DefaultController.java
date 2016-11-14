@@ -13,6 +13,7 @@ import fi.lampola.lafka.repository.RooliRepository;
 import fi.lampola.lafka.repository.TehtavaRepository;
 import fi.lampola.lafka.service.GeoRestClient;
 import fi.lampola.lafka.service.HenkiloService;
+import fi.lampola.lafka.service.TehtavaService;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class DefaultController {
 
     @Autowired
     private HenkiloService henkiloService;
+    
+    @Autowired
+    private TehtavaService tehtavaService;
     
     @Autowired
     private HenkiloRepository henkiloRepository;
@@ -92,7 +96,7 @@ public class DefaultController {
         model.addAttribute("henkilot", henkiloRepository.findAll());
         model.addAttribute("roolit", rooliRepository.findAll());
         model.addAttribute("asiakkaat", asiakasRepository.findAll());
-        model.addAttribute("tehtavat", tehtavaRepository.findAll());
+        model.addAttribute("tehtavat", tehtavaService.getDisplayObj(tehtavaRepository.findAll(), henkiloRepository.findAll()));
         return "index";
     }
 

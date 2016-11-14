@@ -161,21 +161,19 @@
                     <tr th:each="tehtava: ${tehtavat}">
                         <td><b><span th:text="${tehtava.asiakas.nimi}"></span></b></td>
                         <td>&nbsp;</td>
-                        <td><i><span th:text="${tehtava.myyja.sukunimi + ', ' + tehtava.myyja.etunimi}"></span></i></td>
-                        <td>&nbsp;</td>
-                        <td><span th:text="${tehtava.arvioituMyynti}"></span></td>
+                        <td><i><span th:text="${tehtava.myyja.nimi + ', ' + #numbers.formatDecimal(tehtava.myyja.etaisyys, 1, 1, 'POINT') + ' km ' + tehtava.myyja.ilmansuunta + ', ' + tehtava.myyja.tehtavaLkm + ' tehtävää'}"></span></i></td>
                         <td>&nbsp;</td>
 
                         <td>
                             <form method="POST" th:action="@{/tehtavat/{tehtavaId}/myyja(tehtavaId=${tehtava.id})}">
                                 <select name="myyjaId">
-                                    <option th:each="myyja : ${henkilot}" 
+                                    <option th:each="myyja : ${tehtava.asiakas.myyjat}" 
                                             th:if="${myyja.id} != ${tehtava.myyja.id}"
                                             th:value="${myyja.id}" 
-                                            th:text="${myyja.sukunimi + ', ' + myyja.etunimi}">myyjä
+                                            th:text="${myyja.nimi + ', ' + #numbers.formatDecimal(myyja.etaisyys, 1, 1, 'POINT') + ' km ' + myyja.ilmansuunta + ', ' + myyja.tehtavaLkm + ' tehtävää'}">myyjä
                                     </option>
                                 </select>
-                                <input type="submit" value="Vaihda myyjä" id="lisaa_myyjalle"/>
+                                <input type="submit" value="Vaihda myyjä" id="vaihda_myyja"/>
                             </form>
                         </td>
                     </tr>

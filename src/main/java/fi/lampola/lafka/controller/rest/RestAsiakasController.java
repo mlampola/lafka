@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/display/myyjat")
-public class RestTehtavaController {
+public class RestAsiakasController {
     
     @Autowired
     private AsiakasRepository asiakasRepository;
