@@ -8,6 +8,7 @@ package fi.lampola.lafka.domain.display;
 import fi.lampola.lafka.domain.Asiakas;
 import fi.lampola.lafka.domain.Henkilo;
 import fi.lampola.lafka.util.Etaisyys;
+import java.util.Comparator;
 
 /**
  *
@@ -100,4 +101,18 @@ public class DisplayHenkilo {
     public void setLatitudi(Double latitudi) {
         this.latitudi = latitudi;
     }    
+
+    public static Comparator<DisplayHenkilo> EtaisyysComparator
+            = new Comparator<DisplayHenkilo>() {
+
+        public int compare(DisplayHenkilo henkilo1, DisplayHenkilo henkilo2) {
+
+            double etaisyys1 = henkilo1.getEtaisyys();
+            double etaisyys2 = henkilo2.getEtaisyys();
+
+            //ascending order
+            return (int) Math.signum(etaisyys1 - etaisyys2);
+        }
+
+    };
 }

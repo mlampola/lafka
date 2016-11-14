@@ -13,21 +13,34 @@ var ilmansuunnat = [
 ];
 
 $(document).ready(function () {
+    myyjävalinnat();
+});
+
+function myyjävalinnat() {
+    $("#myyjat").empty();
+    
     $.getJSON("/api/v1/display/myyjat/" + $('#asiakkaat').val(),
             function (asiakas) {
                 console.log(asiakas);
                 for (var i in asiakas.myyjat) {
                     var m = asiakas.myyjat[i];
                     console.log(m);
-                    $("#myyjat").append(valinta(m.id, m.nimi, asiakas.longitudi, asiakas.latitudi, m.longitudi, m.latitudi));
+                    // $("#myyjat").append(valinta(m.id, m.nimi, asiakas.longitudi, asiakas.latitudi, m.longitudi, m.latitudi));
+                    $("#myyjat").append(valinta2(m.id, m.nimi, m.etaisyys, m.ilmansuunta, m.tehtavaLkm));
                 }
             }
-    );
-});
+    );    
+}
 
-function valinta(id, nimi, lng1, lat1, lng2, lat2) { // nimen viittaama olio pisteessä (lng1, lat1)          
+function valinta(id, nimi, lng1, lat1, lng2, lat2) { // olio, johon verrataan, on pisteessä (lng1, lat1)          
     var opt = $("<option/>").val(id);
     opt.text(nimi + " " + etäisyys(lng1, lat1, lng2, lat2) + " km " + suunta(lng1, lat1, lng2, lat2));
+    return opt;
+}
+
+function valinta2(id, nimi, etäisyys, suunta, tehtavaLkm) { // nimen viittaaman olion suunta          
+    var opt = $("<option/>").val(id);
+    opt.text(nimi + ", " + etäisyys.toFixed(1) + " km " + suunta + ", " + tehtavaLkm + " tehtävää");
     return opt;
 }
 

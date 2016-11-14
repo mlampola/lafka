@@ -38,6 +38,8 @@ public class DisplayAsiakas {
         for (Henkilo h : henkilot) {
             this.myyjat.add(new DisplayHenkilo(asiakas, h));
         }
+        
+        this.myyjat.sort(DisplayHenkilo.EtaisyysComparator);
     }
 
     public Long getId() {

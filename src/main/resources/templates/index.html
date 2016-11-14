@@ -137,7 +137,7 @@
                                     <tr>
                                         <td><label>Asiakas:</label></td>
 
-                                        <td><select id="asiakkaat" name="asiakasId">
+                                        <td><select id="asiakkaat" name="asiakasId" onchange="myyjävalinnat()">
                                                 <option th:each="asiakas : ${asiakkaat}" th:value="${asiakas.id}" th:text="${asiakas.nimi}">asiakas</option>
                                             </select>
                                         </td>
