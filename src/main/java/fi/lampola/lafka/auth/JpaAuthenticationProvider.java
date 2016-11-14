@@ -6,6 +6,7 @@
 package fi.lampola.lafka.auth;
 
 import fi.lampola.lafka.domain.Henkilo;
+import fi.lampola.lafka.domain.Rooli;
 import fi.lampola.lafka.repository.HenkiloRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +48,12 @@ public class JpaAuthenticationProvider implements AuthenticationProvider {
         }
 
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority(henkilo.getRooli().getNimi()));
-
+        Rooli rooli = henkilo.getRooli();
+        
+        if (rooli != null) {
+            grantedAuths.add(new SimpleGrantedAuthority(henkilo.getRooli().getNimi()));
+        }
+       
         return new UsernamePasswordAuthenticationToken(henkilo.getEmail(), password, grantedAuths);
     }
 
